@@ -1,0 +1,659 @@
+/* === التنسيق العام === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: linear-gradient(135deg, #0c0c0c, #1a1a1a);
+  color: #00eaff;
+  padding: 10px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.box {
+  background: rgba(0, 0, 0, 0.85);
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #00eaff;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+  margin-top: 15px;
+  display: none;
+}
+.box.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+h2 {
+  color: #00eaff;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+.form-group {
+  margin: 12px 0;
+  width: 100%;
+}
+.form-group label {
+  display: block;
+  text-align: right;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #fff;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 12px;
+  background: #000;
+  color: #00eaff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px solid #00eaff;
+  transition: all 0.3s;
+}
+.btn:hover {
+  background: #00eaff;
+  color: #000;
+}
+.btn-primary {
+  background: #000;
+}
+.btn-danger {
+  background: #ff3366;
+  color: white;
+  border-color: #ff3366;
+}
+.btn-danger:hover {
+  background: white;
+  color: #ff3366;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+.grid-item {
+  background: #111;
+  color: #00eaff;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #00eaff;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+.grid-item:hover {
+  background: #000;
+  box-shadow: 0 0 20px #00eaff;
+}
+.table-container {
+  overflow-x: auto;
+  width: 100%;
+  margin: 15px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #000;
+  color: #00eaff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #00eaff;
+  font-size: 14px;
+}
+th {
+  background: #111;
+}
+tr:hover {
+  background: #0a0a0a;
+}
+
+/* === 🔧 تعديل خاص للطباعة — لحل مشكلة الشاشة البيضاء === */
+/* 
+ /* === تنسيق الطباعة === */
+@media print {
+  /* إخفاء كل العناصر */
+  body * {
+    display: none !important;
+  }
+  /* إظهار سند الرسوم فقط */
+  #receiptStudentPage,
+  #receiptStudentPage * {
+    display: block !important;
+  }
+  #receiptStudentPage {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 30px !important;
+    background: white !important;
+    color: black !important;
+    direction: rtl;
+    font-family: 'Tajawal', serif;
+    box-sizing: border-box !important;
+    page-break-after: avoid;
+  }
+  /* إخفاء أزرار الطباعة */
+  #receiptStudentPage .print-hidden {
+    display: none !important;
+  }
+}
+
+/* === تنسيق الجوال === */
+@media (max-width: 480px) {
+  th, td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+  .btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
+/* === حقول البحث === */
+#searchInput {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* === الحقول المخصصة (نصية) === */
+.extra-field {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.extra-field input {
+  flex: 1;
+}
+
+/* === تنبيهات النظام === */
+.alert {
+  color: #ffcc00;
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* === تنسيق الصفوف والمقررات للمعلمين === */
+.teacher-class-row {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+  padding: 8px;
+  background: #111;
+  border-radius: 10px;
+  border: 1px solid #00eaff;
+  align-items: center;
+}
+.teacher-class-row .class-field,
+.teacher-class-row .subject-field {
+  flex: 1;
+  text-align: right;
+}
+.teacher-class-row label {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.teacher-class-row select,
+.teacher-class-row input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  background: #0a0a0a;
+  color: #fff;
+  border: 1px solid #00eaff;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+}
+.teacher-class-row select:focus,
+.teacher-class-row input:focus {
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
+}
+.teacher-class-row .delete-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ff3366;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.teacher-class-row .delete-btn:hover {
+  background: white;
+  color: #ff3366;
+  transform: scale(1.1);
+}
+
+/* ✅ تعديل 5: تحسين تأثيرات الصور */
+#modalStudentPhoto,
+#modalImageView {
+  transition: all 0.3s ease;
+  cursor: zoom-in;
+}
+
+#modalStudentPhoto:hover,
+#modalImageView:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+/* ✅ تعديل 6: تحسين تصميم الخلايا */
+.modal-data-row {
+  border-bottom: 1px solid #333;
+  transition: background-color 0.2s;
+}
+
+.modal-data-row:hover {
+  background-color: #222;
+}
+
+/* ✅ تعديل 7: تحسين التصميم للهاتف */
+@media (max-width: 768px) {
+  #modalStudentPhoto {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  
+  .modal-data-row td {
+    padding: 6px 4px !important;
+    font-size: 13px !important;
+  }
+}
+
+
+
+
+/* === تصحيح تنسيق الحقول المخصصة (كان فيه خطأ في الإغلاق) === */
+.extra-field .form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #00eaff;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+.extra-field .form-group input:focus {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+}
+
+/* تغيير ترتيب الأزرار إلى أفقي */
+.btn-action, .btn-save, .btn-back {
+  width: auto;
+  flex: 1 0 150px; /* جعل الأزرار تتناسب مع الحيز المتاح */
+}
+
+/* أزرار الحفظ والإضافة - أزرق مع نص أبيض */
+.btn-action, .btn-save {
+  background: #00eaff;
+  color: white;
+  border-color: #00eaff;
+}
+
+.btn-action:hover, .btn-save:hover {
+  background: white;
+  color: #00eaff;
+}
+
+/* زر الرجوع - أحمر مع نص أبيض */
+.btn-back {
+  background: #ff3366;
+  color: white;
+  border-color: #ff3366;
+}
+
+.btn-back:hover {
+  background: white;
+  color: #ff3366;
+}
+
+/* تعديلات القائمة المخصصة للشعب */
+.section-option:hover {
+  background: #0a0a0a;
+}
+
+.section-delete-btn:hover {
+  color: #ff0000;
+  transform: scale(1.2);
+}
+
+/* لمنع إغلاق القائمة عند النقر على زر الحذف */
+.section-delete-btn {
+  pointer-events: auto !important;
+}
+
+
+/* تحسين ألوان الحقول المطلوبة */
+.green-field {
+  background: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+}
+.green-field input,
+.green-field select,
+.green-field textarea {
+  background: #28a745 !important;
+  border-color: #28a745 !important;
+  color: white !important;
+}
+.green-field input:focus,
+.green-field select:focus,
+.green-field textarea:focus {
+  box-shadow: 0 0 12px rgba(40, 167, 69, 0.5) !important;
+}
+
+/* تغيير لون زر إضافة شعبة إلى أزرق */
+.add-section-btn {
+  background: #007bff !important;
+  border-color: #007bff !important;
+  color: white !important;
+}
+.add-section-btn:hover {
+  background: #0069d9 !important;
+  color: white !important;
+}
+
+/* ترتيب الحقول بشكل أفضل */
+.add-student-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.add-student-form .form-group {
+  margin: 0;
+}
+
+/* === تنسيق الطباعة للسند - مُحسَّن === */
+@media print {
+  /* إخفاء كل شيء ما عدا صفحة السند */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* إظهار صفحة السند فقط */
+  #salaryReceiptPage, #salaryReceiptPage * {
+    visibility: visible;
+  }
+  
+  /* ضبط موضع السند للطباعة */
+  #salaryReceiptPage {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+  }
+  
+  /* إخفاء الأزرار عند الطباعة */
+  .print-hidden, .print-hidden * {
+    display: none !important;
+  }
+  
+  /* ضبط خلفية الجسم للطباعة */
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  
+  /* ضبط ألوان السند للطباعة */
+  #salaryReceiptPage {
+    background: white !important;
+    color: black !important;
+    font-family: 'Amiri', serif !important;
+  }
+  
+  /* ضبط حدود الجدول */
+  #salaryReceiptPage table {
+    border: 2px solid #000 !important;
+    width: 100% !important;
+  }
+  
+  #salaryReceiptPage td {
+    border: 1px solid #000 !important;
+    color: black !important;
+    padding: 12px !important;
+  }
+  
+  #salaryReceiptPage h2 {
+    color: #000 !important;
+  }
+  
+  /* إخفاء عناصر الواجهة */
+  .box, .grid, .btn, nav, header, footer {
+    display: none !important;
+  }
+  
+  /* ضبط الخطوط */
+  #salaryReceiptPage * {
+    font-family: 'Amiri', serif !important;
+    color: black !important;
+  }
+}
+/* === 📱 تصميم متجاوب للهواتف === */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px !important;
+    }
+    
+    .box {
+        padding: 10px !important;
+    }
+    
+    table {
+        font-size: 12px !important;
+    }
+    
+    th, td {
+        padding: 8px !important;
+    }
+    
+    button {
+        font-size: 14px !important;
+        padding: 10px 15px !important;
+    }
+    
+    /* تحسين التمرير الأفقي للجداول */
+    div[style*="overflow-x:auto"] {
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h2, h3 {
+        font-size: 16px !important;
+    }
+    
+    .grid-item {
+        padding: 15px 10px !important;
+    }
+    
+    /* جعل الأزرار في عمود واحد */
+    div[style*="display:flex"][style*="gap"] {
+        flex-direction: column !important;
+    }
+    
+    div[style*="display:flex"][style*="gap"] button {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* === تحسينات عامة === */
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+/* تأثيرات hover للأزرار */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* تحسين عرض الجداول على الهواتف */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    white-space: nowrap;
+}
+
+/* تحسين حقول الإدخال */
+input, textarea, select {
+    font-size: 16px; /* لمنع التكبير التلقائي على iOS */
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #444;
+}
+
+/* تحسين البطاقات */
+.grid-item {
+    transition: all 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+
+
+/* === 🎯 الأعمدة الثابتة - نظام ديناميكي === */
+
+/* إعدادات الجدول */
+#studentsTable {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  table-layout: auto !important;  /* ✅ ضروري للحساب الديناميكي */
+  width: 100%;
+  min-width: 1000px;  /* عشان يظهر الشريط */
+}
+
+/* كلاس عام للأعمدة الثابتة */
+.sticky-col {
+  position: sticky;  /* سيتم تطبيقه ديناميكيًا */
+  z-index: 10;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* تخصيص كل عمود */
+.col-photo {
+  min-width: 80px;
+  background: #111 !important;
+  z-index: 100 !important;
+  text-align: center;
+}
+
+.col-name {
+  min-width: 180px;
+  background: #1a1a1a !important;
+  z-index: 99 !important;
+  font-weight: bold;
+  color: #00eaff;
+}
+
+.col-section {
+  min-width: 120px;
+  background: #222 !important;
+  z-index: 98 !important;
+  font-weight: bold;
+  color: #00eaff;
+}
+
+/* الحاوية */
+.table-container {
+  overflow-x: auto !important;
+  position: relative !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+table { border-collapse: collapse; }
